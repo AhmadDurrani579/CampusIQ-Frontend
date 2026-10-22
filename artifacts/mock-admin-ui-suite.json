@@ -1,0 +1,766 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=mock"
+    ],
+    "configFile": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\playwright.config.js",
+    "rootDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/^(?!.*mock).*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mock",
+        "name": "mock",
+        "testDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mock.*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "mock",
+        "testDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests",
+        "snapshotDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5176",
+          "trace": "retain-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge",
+          "launchOptions": {
+            "args": [
+              "--disable-gpu"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mock"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "artifacts/test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mock-admin.spec.js",
+      "file": "mock-admin.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "requested Instructor signs in only after Admin approval and keeps canonical profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:52:25.710Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-af482675c521b7b4cb04",
+          "file": "mock-admin.spec.js",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "Admin can create and edit departments, assign staff, inspect routing and audit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11414,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:52:51.209Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-b36797e0fbbaabc66fd4",
+          "file": "mock-admin.spec.js",
+          "line": 56,
+          "column": 1
+        },
+        {
+          "title": "Admin announcement reaches Student notification center and unread count changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:02.656Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-70ffa69f66ef4faa7e24",
+          "file": "mock-admin.spec.js",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "Admin edits a user department, confirms deactivation, and saves an actual staff assignment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:13.550Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-8e6ed5fb68837e6a9919",
+          "file": "mock-admin.spec.js",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "Instructor saved leave reroutes a new query and emits simulated absence reply",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:21.895Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-c24ed34efe3acdc6352a",
+          "file": "mock-admin.spec.js",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "Admin demo clock advances exactly 24 hours and reset preserves theme while clearing records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6472,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:32.924Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-cf0f0713e1ce1b9535e6",
+          "file": "mock-admin.spec.js",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "title": "mobile navigation, dark mode and public preview stay usable without private session reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:39.427Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9ccd3fc30ce9fd54c558-4eeebd13f0039f94dddd",
+          "file": "mock-admin.spec.js",
+          "line": 165,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "mock-queries.spec.js",
+      "file": "mock-queries.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "student submission persists attachments and channel; instructor saves, reloads and sends a reviewed draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:53:50.947Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-332aebd5918b5c9dca90",
+          "file": "mock-queries.spec.js",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "current dashboard metrics and workload remain scoped to each signed-in role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10210,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:03.939Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-67281be8d08ed3d67126",
+          "file": "mock-queries.spec.js",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "attachment limits reject unsupported, excessive and oversized files while preserving form input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7869,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:14.186Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-a4fa8ac925aa91b7153a",
+          "file": "mock-queries.spec.js",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "status polling preserves unsaved reply text and failed confirmed send surfaces storage error",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16105,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:22.088Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-573d42a3c06c3f52a89b",
+          "file": "mock-queries.spec.js",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "title": "submission reads files once, blocks duplicate creation, and private records stay out of preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12565,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:38.219Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-031c7f32fe27f813a2f8",
+          "file": "mock-queries.spec.js",
+          "line": 113,
+          "column": 1
+        },
+        {
+          "title": "HOD escalates and reassigns within department with real timeline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:50.817Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-cc3e921acb6985826964",
+          "file": "mock-queries.spec.js",
+          "line": 133,
+          "column": 1
+        },
+        {
+          "title": "role privacy and unknown query show explicit error without revealing data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5650,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:54:57.569Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-40f7a4bd89c673b80ec2",
+          "file": "mock-queries.spec.js",
+          "line": 147,
+          "column": 1
+        },
+        {
+          "title": "report date filters drive real PDF and Excel downloads including empty ranges",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:55:03.261Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-acb0f58c6e003f751f0e",
+          "file": "mock-queries.spec.js",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "query directory search, priority/status filters, chronological sorting and pagination use actual records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6946,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:55:17.904Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-d3bc4249fd3926125598",
+          "file": "mock-queries.spec.js",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "staff status controls support closed and manual states while submitted/classifying stay read-only",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:55:24.901Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-dc9776ef1335880f8932",
+          "file": "mock-queries.spec.js",
+          "line": 201,
+          "column": 1
+        },
+        {
+          "title": "leaving a form during file reading cancels creation instead of submitting under a subsequent session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:55:31.764Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-984cfb8329acade29933",
+          "file": "mock-queries.spec.js",
+          "line": 212,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T12:52:18.000Z",
+    "duration": 203023.384,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
