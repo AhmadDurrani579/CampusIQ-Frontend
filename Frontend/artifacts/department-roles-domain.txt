@@ -1,0 +1,5 @@
+npm test -> npm run test:domain: 42 tests, 42 passed, 0 failed/skipped/cancelled/todo; duration11887.5404ms.
+Initial new-domain RED: five tests failed for missing role registration, staff routing and migration.
+Final review RED: three regressions failed for reused Finance code, overlapping department identities blocking login, and unrelated EXM code adoption.
+All eight new domain cases now pass alongside the original34.
+Recorded command-output summary.

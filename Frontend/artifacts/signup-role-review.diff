@@ -1,0 +1,42 @@
+--- before/src/utils/roles.js
++++ after/src/utils/roles.js
+@@ -1,6 +1,7 @@
+ export const LEGACY_ROLES = ['STUDENT', 'INSTRUCTOR', 'HOD', 'ADMIN'];
+ export const DEPARTMENT_ROLES = ['EXAM_STAFF', 'FINANCE_STAFF', 'IT_STAFF'];
+ export const ROLES = [...LEGACY_ROLES.slice(0, 3), ...DEPARTMENT_ROLES, 'ADMIN'];
++export const PUBLIC_SIGNUP_ROLES = ROLES.filter(role => role !== 'ADMIN');
+ export const STAFF_ROLES = ['INSTRUCTOR', ...DEPARTMENT_ROLES];
+ export const REPLY_ROLES = [...STAFF_ROLES, 'HOD', 'ADMIN'];
+ export const isDepartmentStaff = role => DEPARTMENT_ROLES.includes(role);
+--- before/src/pages/auth/SignupPage.jsx
++++ after/src/pages/auth/SignupPage.jsx
+@@ -8,8 +8,8 @@
+ import { useAuth } from '../../context/AuthContext';
+ import { getApiErrorMessage } from '../../utils/apiErrors';
+ import { isMockMode } from '../../api/mode';
+-import { ROLES, LEGACY_ROLES, roleLabels } from '../../utils/roles';
+-const signupRoles = isMockMode ? ROLES : LEGACY_ROLES.filter(role => role !== 'ADMIN');
++import { ROLES, PUBLIC_SIGNUP_ROLES, roleLabels } from '../../utils/roles';
++const signupRoles = isMockMode ? ROLES : PUBLIC_SIGNUP_ROLES;
+ 
+ const schema = z.object({
+   full_name: z.string().trim().min(2, 'Enter your full name.').max(100, 'Use at most 100 characters.'),
+--- before/src/api/authApi.js
++++ after/src/api/authApi.js
+@@ -2,6 +2,7 @@
+ import { ApiContractError } from '../utils/apiErrors';
+ import { isMockMode } from './mode';
+ import { mockService } from '../mock/service';
++import { PUBLIC_SIGNUP_ROLES } from '../utils/roles';
+ 
+ export async function login({ email, password }) {
+   if (isMockMode) return mockService.login({ email, password });
+@@ -13,7 +14,7 @@
+ }
+ export async function signup({ full_name, email, password, requested_role }) {
+   if (isMockMode) return mockService.signup({ full_name, email, password, requested_role });
+-  if (!['STUDENT', 'INSTRUCTOR', 'HOD'].includes(requested_role)) throw new ApiContractError('Choose a student, instructor or HOD registration role.');
++  if (!PUBLIC_SIGNUP_ROLES.includes(requested_role)) throw new ApiContractError('Choose a supported registration role.');
+   const { data } = await axiosClient.post('/auth/signup', { full_name, email, password, requested_role }, { auth: false });
+   return data;
+ }

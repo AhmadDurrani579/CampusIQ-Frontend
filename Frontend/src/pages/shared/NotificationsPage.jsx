@@ -1,0 +1,15 @@
+import { useState } from 'react';
+import { Bell, CheckCheck, Mail, Settings2 } from 'lucide-react';
+import { Card, Button, Badge, PageHeader, EmptyState } from '../../components/ui';
+import FeatureNotice from '../../components/common/FeatureNotice';
+import { isMockMode } from '../../api/mode';
+import { MockNotificationsPage } from '../mock/MockPersonalPages';
+
+export default function NotificationsPage({ preview = false, sample = [] }) {
+  if (isMockMode && !preview) return <MockNotificationsPage />;
+  const [readState, setReadState] = useState(() => Object.fromEntries(sample.map((n) => [n.id, !n.unread])));
+  const [filter, setFilter] = useState('all');
+  const isUnread = (notification) => !(readState[notification.id] ?? !notification.unread);
+  const visible = sample.filter((n) => filter !== 'unread' || isUnread(n));
+  return <><PageHeader title="Notifications" description="The updates that keep your campus day moving." actions={<Button variant="secondary" disabled={!preview} onClick={() => setReadState(Object.fromEntries(sample.map((n) => [n.id, true])))}><CheckCheck size={16} />Mark preview as read</Button>} /><FeatureNotice>Notification delivery, email, WhatsApp and live WebSocket updates are not connected. Preview read states are local presentation changes only.</FeatureNotice><Card><div className="card-heading"><div><h2>Your notification center {preview && <Badge>Demo data</Badge>}</h2><p>Assignments, replies, approvals and announcements in one place.</p></div><div className="segmented-control"><button className={filter === 'all' ? 'selected' : ''} onClick={() => setFilter('all')}>All</button><button className={filter === 'unread' ? 'selected' : ''} onClick={() => setFilter('unread')}>Unread</button></div></div>{preview && visible.length ? <div className="notification-list">{visible.map((n) => <div key={n.id} className={isUnread(n) ? 'notification-unread' : ''}><span className="section-icon"><Bell size={18} /></span><div><strong>{n.title}</strong><p>{n.description}</p><small>{n.time} · Demo data</small></div><Button variant="ghost" size="sm" onClick={() => setReadState((current) => ({ ...current, [n.id]: !(current[n.id] ?? !n.unread) }))}>{isUnread(n) ? 'Mark preview read' : 'Mark preview unread'}</Button></div>)}</div> : <EmptyState title={preview ? 'All caught up' : 'Your updates will appear here'} description={preview ? 'No unread sample notifications match this view.' : 'The notification API will provide genuine delivery and read status.'} icon={Bell} />}</Card><Card className="padded-card"><div className="section-title"><span className="section-icon"><Settings2 size={20} /></span><div><h2>Delivery channels</h2><p>Preferences will be managed by the backend notification service.</p></div></div><div className="channel-settings"><div><Bell size={19} /><span>In-app updates</span><Badge tone="amber">Not connected</Badge></div><div><Mail size={19} /><span>Email & WhatsApp</span><Badge tone="amber">Not connected</Badge></div></div></Card></>;
+}

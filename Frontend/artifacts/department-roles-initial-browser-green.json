@@ -1,0 +1,453 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Ali Noor\\Desktop\\Smart-Query-Routing-Email-Automation-System\\Frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=mock",
+      "tests/mock-roles.spec.js"
+    ],
+    "configFile": "C:\\Users\\Ali Noor\\Desktop\\Smart-Query-Routing-Email-Automation-System\\Frontend\\playwright.config.js",
+    "rootDir": "C:/Users/Ali Noor/Desktop/Smart-Query-Routing-Email-Automation-System/Frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/Smart-Query-Routing-Email-Automation-System/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Ali Noor/Desktop/Smart-Query-Routing-Email-Automation-System/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/^(?!.*mock).*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/Smart-Query-Routing-Email-Automation-System/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mock",
+        "name": "mock",
+        "testDir": "C:/Users/Ali Noor/Desktop/Smart-Query-Routing-Email-Automation-System/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mock.*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\Ali Noor\\Desktop\\Smart-Query-Routing-Email-Automation-System\\Frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "mock",
+        "testDir": "C:\\Users\\Ali Noor\\Desktop\\Smart-Query-Routing-Email-Automation-System\\Frontend\\tests",
+        "snapshotDir": "C:\\Users\\Ali Noor\\Desktop\\Smart-Query-Routing-Email-Automation-System\\Frontend\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5176",
+          "trace": "retain-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge",
+          "launchOptions": {
+            "args": [
+              "--disable-gpu"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mock"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "artifacts/test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mock-roles.spec.js",
+      "file": "mock-roles.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "signup lists seven requested roles without granting Admin access",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:06:31.865Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-254371690d06c8df2ba2",
+          "file": "mock-roles.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Examination Staff registration is pending until an existing Admin approves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:06:44.043Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-e0bc65aa8b15298975b0",
+          "file": "mock-roles.spec.js",
+          "line": 10,
+          "column": 41
+        },
+        {
+          "title": "Finance Staff registration is pending until an existing Admin approves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:06:56.346Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-9f6093be43d2cfc6cfad",
+          "file": "mock-roles.spec.js",
+          "line": 10,
+          "column": 41
+        },
+        {
+          "title": "IT Department Staff registration is pending until an existing Admin approves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12786,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:07:09.900Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-54267206599eec4616e9",
+          "file": "mock-roles.spec.js",
+          "line": 10,
+          "column": 41
+        },
+        {
+          "title": "Admin registration is pending until an existing Admin approves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14111,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:07:22.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-8fdec42a20d36e848c6d",
+          "file": "mock-roles.spec.js",
+          "line": 10,
+          "column": 41
+        },
+        {
+          "title": "Examination Staff handles department queries and cannot access another department or Admin",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16063,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:07:36.868Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-65560bba6cdbd23cc8ab",
+          "file": "mock-roles.spec.js",
+          "line": 16,
+          "column": 60
+        },
+        {
+          "title": "Finance Staff handles department queries and cannot access another department or Admin",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16105,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:07:52.967Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-5c7d4f66eb0c5dbc8dcf",
+          "file": "mock-roles.spec.js",
+          "line": 16,
+          "column": 60
+        },
+        {
+          "title": "IT Department Staff handles department queries and cannot access another department or Admin",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15142,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:08:09.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-e1642519f44fe1156cc3",
+          "file": "mock-roles.spec.js",
+          "line": 16,
+          "column": 60
+        },
+        {
+          "title": "new staff mobile navigation, theme and unsupported preview role remain isolated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7799,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T19:08:24.299Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "26607a474ab2b2f925af-835e7543d57177989abd",
+          "file": "mock-roles.spec.js",
+          "line": 24,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T19:06:25.328Z",
+    "duration": 128584.532,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

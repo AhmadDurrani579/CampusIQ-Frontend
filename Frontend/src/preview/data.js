@@ -1,0 +1,27 @@
+// Presentation fixtures only. Never import into API services or authentication state.
+export const previewUsers = {
+  ADMIN: { full_name: 'Hassan Ahmed', email: 'hassan.ahmed@university.edu', role: 'ADMIN' },
+  STUDENT: { full_name: 'Ayesha Siddiqui', email: 'ayesha.siddiqui@university.edu', role: 'STUDENT' },
+  INSTRUCTOR: { full_name: 'Dr. Sarah Khan', email: 'sarah.khan@university.edu', role: 'INSTRUCTOR' },
+  HOD: { full_name: 'Dr. Omar Farooq', email: 'omar.farooq@university.edu', role: 'HOD' },
+};
+export const demoQueries = [
+  { id: 1048, reference: 'QRY-1048', subject: 'Scholarship application deadline', student: 'Ayesha Siddiqui', initials: 'AS', department: 'Financial Aid', channel: 'Web', status: 'IN_PROGRESS', priority: 'High', date: '12 Oct 2026', updated: '20 minutes ago', time: '10:24 AM', color: 'blue', description: 'I would like to ask about the application deadline for the merit scholarship and the documents required for the upcoming semester.' },
+  { id: 1047, reference: 'QRY-1047', subject: 'Course registration assistance', student: 'Ali Raza', initials: 'AR', department: 'Academics', channel: 'Email', status: 'ASSIGNED', priority: 'Medium', date: '12 Oct 2026', updated: '45 minutes ago', time: '09:45 AM', color: 'purple' },
+  { id: 1046, reference: 'QRY-1046', subject: 'Library membership renewal', student: 'Fatima Malik', initials: 'FM', department: 'Library', channel: 'WhatsApp', status: 'RESOLVED', priority: 'Low', date: '11 Oct 2026', updated: '1 hour ago', time: '09:12 AM', color: 'green' },
+  { id: 1045, reference: 'QRY-1045', subject: 'Tuition fee installment request', student: 'Usman Tariq', initials: 'UT', department: 'Finance', channel: 'Web', status: 'ESCALATED', priority: 'High', date: '10 Oct 2026', updated: '2 hours ago', time: 'Yesterday', color: 'orange' },
+  { id: 1044, reference: 'QRY-1044', subject: 'Semester examination schedule', student: 'Zainab Noor', initials: 'ZN', department: 'Examinations', channel: 'Email', status: 'RESOLVED', priority: 'Medium', date: '11 Oct 2026', updated: '3 hours ago', time: 'Yesterday', color: 'teal' },
+  { id: 1043, reference: 'QRY-1043', subject: 'Campus Wi-Fi connectivity issue', student: 'Bilal Ahmed', initials: 'BA', department: 'IT Support', channel: 'Web', status: 'CLASSIFYING', priority: 'Low', date: '12 Oct 2026', updated: 'Just now', time: 'Yesterday', color: 'blue' },
+];
+export const demoVolume = [
+  { day: 'Mon', queries: 38, resolved: 27 }, { day: 'Tue', queries: 55, resolved: 40 }, { day: 'Wed', queries: 42, resolved: 31 },
+  { day: 'Thu', queries: 72, resolved: 53 }, { day: 'Fri', queries: 61, resolved: 45 }, { day: 'Sat', queries: 83, resolved: 62 }, { day: 'Sun', queries: 68, resolved: 54 },
+];
+export const demoDepartment = [{ name: 'Academics', value: 86 }, { name: 'Finance', value: 68 }, { name: 'Admissions', value: 57 }, { name: 'IT Support', value: 42 }, { name: 'Library', value: 28 }];
+export const demoStaffWorkload = [{ name: 'Dr. Sarah Khan', value: 28 }, { name: 'Dr. Omar Farooq', value: 21 }, { name: 'Ms. Sana Ali', value: 17 }, { name: 'Mr. Ali Raza', value: 12 }];
+export const demoEscalations = demoQueries.filter((query) => query.status === 'ESCALATED').map((query) => ({ ...query, assigned_instructor: 'Dr. Sarah Khan', submitted_at: '10 Oct 2026 · 10:45 AM' }));
+export const demoStatuses = [{ name: 'Resolved', value: 72, color: '#10b981' }, { name: 'In progress', value: 18, color: '#4a70ed' }, { name: 'Open', value: 7, color: '#f6b452' }, { name: 'Escalated', value: 3, color: '#f07878' }];
+export const demoApprovals = [{ id: 31, full_name: 'Ahmed Hassan', email: 'ahmed.hassan@university.edu', requested_role: 'INSTRUCTOR', created_at: '2026-10-12T08:00:00Z', approval_status: 'PENDING' }, { id: 32, full_name: 'Maryam Ali', email: 'maryam.ali@university.edu', requested_role: 'STUDENT', created_at: '2026-10-12T09:00:00Z', approval_status: 'PENDING' }];
+export const demoDepartments = [{ id: 1, name: 'Academics', code: 'ACA', description: 'Course registration, academic records and instructor support.', is_active: true }, { id: 2, name: 'Finance', code: 'FN', description: 'Tuition fees, installments, refunds and payment methods.', is_active: true }, { id: 3, name: 'Admissions', code: 'ADM', description: 'Admissions applications and enrollment information.', is_active: true }, { id: 4, name: 'Library', code: 'LIB', description: 'Library access, books and borrowing assistance.', is_active: true }];
+export const demoActivities = [{ initials: 'SK', color: 'green', text: 'Dr. Sarah Khan resolved a query', detail: 'Library membership renewal', time: '12 min ago' }, { initials: 'AI', color: 'blue', text: 'Query routed to Financial Aid', detail: 'Scholarship application deadline', time: '28 min ago' }, { initials: 'HA', color: 'purple', text: 'Hassan approved a registration', detail: 'New instructor account', time: '45 min ago' }, { initials: 'OF', color: 'orange', text: 'Query escalated to HOD', detail: 'Tuition fee installment request', time: '1 hour ago' }];
+export const demoNotifications = [{ id: 1, title: 'A new query needs your attention', description: 'Scholarship application deadline · Financial Aid', time: '20 minutes ago', unread: true }, { id: 2, title: 'Registration awaiting approval', description: 'Ahmed Hassan requested an instructor account.', time: '45 minutes ago', unread: true }, { id: 3, title: 'Weekly campus update', description: 'The library will extend its opening hours this week.', time: '2 hours ago', unread: false }];

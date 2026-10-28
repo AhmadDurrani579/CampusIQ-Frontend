@@ -1,0 +1,8 @@
+14 October 2026: npm run build
+Exit code: 0
+Vite 8.3.4: 3341 modules transformed; built in 6.94s after the final CSS spacing correction.
+CSS 56.59 kB / 12.89 kB gzip.
+Application chunk 641.08 kB / 190.09 kB gzip.
+ExcelJS lazy export chunk 929.48 kB / 256.40 kB gzip.
+Retained warning: one chunk is larger than the configured 750 kB minified limit.
+This is a root-recorded summary of the executed command output, not a verbatim shell log.

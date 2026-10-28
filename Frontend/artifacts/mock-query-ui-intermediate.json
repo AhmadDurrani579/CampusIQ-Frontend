@@ -1,0 +1,489 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=mock",
+      "tests/mock-queries.spec.js"
+    ],
+    "configFile": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\playwright.config.js",
+    "rootDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/^(?!.*mock).*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mock",
+        "name": "mock",
+        "testDir": "C:/Users/Ali Noor/Desktop/smart-query-routing -email-auto-system/Frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mock.*\\.spec\\.js$/"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "mock",
+        "testDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests",
+        "snapshotDir": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5176",
+          "trace": "retain-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge",
+          "launchOptions": {
+            "args": [
+              "--disable-gpu"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mock"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "artifacts/test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mock-queries.spec.js",
+      "file": "mock-queries.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "student submission persists attachments and channel; instructor saves, reloads and sends a reviewed draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16493,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:13:54.568Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-332aebd5918b5c9dca90",
+          "file": "mock-queries.spec.js",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "current dashboard metrics and workload remain scoped to each signed-in role",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5010,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Open my workload', exact: true }) resolved to 2 elements:\n    1) <a data-discover=\"true\" href=\"/instructor/reports\" class=\"button button-secondary\">Open my workload</a> aka locator('a').filter({ hasText: /^Open my workload$/ })\n    2) <a class=\"text-link\" data-discover=\"true\" href=\"/instructor/reports\">…</a> aka getByRole('link', { name: 'Open my workload' }).nth(1)\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Open my workload', exact: true })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Open my workload', exact: true }) resolved to 2 elements:\n    1) <a data-discover=\"true\" href=\"/instructor/reports\" class=\"button button-secondary\">Open my workload</a> aka locator('a').filter({ hasText: /^Open my workload$/ })\n    2) <a class=\"text-link\" data-discover=\"true\" href=\"/instructor/reports\">…</a> aka getByRole('link', { name: 'Open my workload' }).nth(1)\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Open my workload', exact: true })\u001b[22m\n\n    at C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js:73:79",
+                    "location": {
+                      "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                      "column": 79,
+                      "line": 73
+                    },
+                    "snippet": "  71 |     await expect(page.locator('.metric-card').filter({ hasText: 'Resolved queries' }).locator('.metric-value')).toHaveText(resolved);\n  72 |     if (role === 'INSTRUCTOR') {\n> 73 |       await page.getByRole('link', { name: 'Open my workload', exact: true }).click();\n     |                                                                               ^\n  74 |       await expect(page.getByRole('button', { name: 'Export PDF' })).toHaveCount(0);\n  75 |       await expect(page.getByRole('button', { name: 'Export Excel' })).toHaveCount(0);\n  76 |     }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                        "column": 79,
+                        "line": 73
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Open my workload', exact: true }) resolved to 2 elements:\n    1) <a data-discover=\"true\" href=\"/instructor/reports\" class=\"button button-secondary\">Open my workload</a> aka locator('a').filter({ hasText: /^Open my workload$/ })\n    2) <a class=\"text-link\" data-discover=\"true\" href=\"/instructor/reports\">…</a> aka getByRole('link', { name: 'Open my workload' }).nth(1)\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Open my workload', exact: true })\u001b[22m\n\n\n  71 |     await expect(page.locator('.metric-card').filter({ hasText: 'Resolved queries' }).locator('.metric-value')).toHaveText(resolved);\n  72 |     if (role === 'INSTRUCTOR') {\n> 73 |       await page.getByRole('link', { name: 'Open my workload', exact: true }).click();\n     |                                                                               ^\n  74 |       await expect(page.getByRole('button', { name: 'Export PDF' })).toHaveCount(0);\n  75 |       await expect(page.getByRole('button', { name: 'Export Excel' })).toHaveCount(0);\n  76 |     }\n    at C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js:73:79"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:11.661Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results\\mock-queries-current-dashb-c1149-oped-to-each-signed-in-role-mock\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results\\mock-queries-current-dashb-c1149-oped-to-each-signed-in-role-mock\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                    "column": 79,
+                    "line": 73
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-67281be8d08ed3d67126",
+          "file": "mock-queries.spec.js",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "attachment limits reject unsupported, excessive and oversized files while preserving form input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:18.377Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-a4fa8ac925aa91b7153a",
+          "file": "mock-queries.spec.js",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "status polling preserves unsaved reply text and failed confirmed send surfaces storage error",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:24.765Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-573d42a3c06c3f52a89b",
+          "file": "mock-queries.spec.js",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "title": "submission reads files once, blocks duplicate creation, and private records stay out of preview",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11320,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"=SUM(1,1) private course request\"\u001b[39m\nReceived: \u001b[31m\"Course change resolved\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"=SUM(1,1) private course request\"\u001b[39m\nReceived: \u001b[31m\"Course change resolved\"\u001b[39m\n    at C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js:126:66",
+                    "location": {
+                      "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                      "column": 66,
+                      "line": 126
+                    },
+                    "snippet": "  124 |   const { default: ExcelJS } = await import('exceljs'); const workbook = new ExcelJS.Workbook(); await workbook.xlsx.readFile(await (await event).path());\n  125 |   const sheet = workbook.getWorksheet('Queries'); expect(sheet.rowCount).toBe(10);\n> 126 |   const value = sheet.getRow(10).getCell(2).value; expect(value).toBe('=SUM(1,1) private course request'); expect(typeof value).toBe('string');\n      |                                                                  ^\n  127 |   await page.evaluate(() => { history.pushState({}, '', '/preview?role=STUDENT&page=queries'); dispatchEvent(new PopStateEvent('popstate')); });\n  128 |   await expect(page.getByText('Read-only preview', { exact: true })).toBeVisible();\n  129 |   await expect(page.getByText('=SUM(1,1) private course request', { exact: true })).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                        "column": 66,
+                        "line": 126
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"=SUM(1,1) private course request\"\u001b[39m\nReceived: \u001b[31m\"Course change resolved\"\u001b[39m\n\n  124 |   const { default: ExcelJS } = await import('exceljs'); const workbook = new ExcelJS.Workbook(); await workbook.xlsx.readFile(await (await event).path());\n  125 |   const sheet = workbook.getWorksheet('Queries'); expect(sheet.rowCount).toBe(10);\n> 126 |   const value = sheet.getRow(10).getCell(2).value; expect(value).toBe('=SUM(1,1) private course request'); expect(typeof value).toBe('string');\n      |                                                                  ^\n  127 |   await page.evaluate(() => { history.pushState({}, '', '/preview?role=STUDENT&page=queries'); dispatchEvent(new PopStateEvent('popstate')); });\n  128 |   await expect(page.getByText('Read-only preview', { exact: true })).toBeVisible();\n  129 |   await expect(page.getByText('=SUM(1,1) private course request', { exact: true })).toHaveCount(0);\n    at C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js:126:66"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:39.564Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results\\mock-queries-submission-re-37c2f-records-stay-out-of-preview-mock\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\test-results\\mock-queries-submission-re-37c2f-records-stay-out-of-preview-mock\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\Ali Noor\\Desktop\\smart-query-routing -email-auto-system\\Frontend\\tests\\mock-queries.spec.js",
+                    "column": 66,
+                    "line": 126
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-031c7f32fe27f813a2f8",
+          "file": "mock-queries.spec.js",
+          "line": 113,
+          "column": 1
+        },
+        {
+          "title": "HOD escalates and reassigns within department with real timeline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6063,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:52.688Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-cc3e921acb6985826964",
+          "file": "mock-queries.spec.js",
+          "line": 133,
+          "column": 1
+        },
+        {
+          "title": "role privacy and unknown query show explicit error without revealing data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4472,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:14:59.314Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-40f7a4bd89c673b80ec2",
+          "file": "mock-queries.spec.js",
+          "line": 147,
+          "column": 1
+        },
+        {
+          "title": "report date filters drive real PDF and Excel downloads including empty ranges",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mock",
+              "projectName": "mock",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:15:03.817Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0993944dda6d48e7fa90-acb0f58c6e003f751f0e",
+          "file": "mock-queries.spec.js",
+          "line": 158,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T12:13:49.012Z",
+    "duration": 89328.603,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,5 @@
+Final reviewed source: npm run build, exit 0.
+Vite 8.3.4, 3343 modules transformed, built in 9.56 seconds.
+CSS 56.61 kB / 12.90 kB gzip; app chunk 650.51 kB / 191.87 kB gzip.
+Retained lazy ExcelJS warning: 929.48 kB minified / 256.40 kB gzip, loaded only on export.
+This is a recorded summary of executed output rather than a verbatim shell log.

@@ -1,0 +1,6 @@
+14 October 2026: npm test -> npm run test:domain
+node --test --test-isolation=none tests/domain/*.test.js
+34 tests, 34 passed, 0 failed, 0 cancelled, 0 skipped, 0 todo.
+Duration: 6645.8029 ms.
+Includes the three final-review regressions. Their initial focused RED run produced 0 passed / 3 failed for the exact reported issues; this GREEN run includes all existing domain cases.
+This is a root-recorded summary of the executed command output, not a verbatim shell log.

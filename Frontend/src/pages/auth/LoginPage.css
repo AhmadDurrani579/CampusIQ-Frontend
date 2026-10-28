@@ -1,0 +1,228 @@
+
+/* ==========================================
+   GOOGLE SIGN-IN - REAL API INTEGRATION
+========================================== */
+
+/* Google button section */
+.login-design-card .login-google-section {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Official Google Sign-In button container */
+.login-design-card .login-google-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+/* Container rendered by Google Identity Services */
+.login-design-card .login-google-button-container > div {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* Google iframe */
+.login-design-card .login-google-button-container iframe {
+  max-width: 100%;
+}
+
+/* Loading and status message */
+.login-design-card .login-google-note {
+  margin: 8px 0 0;
+  color: var(--login-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .login-design-card .login-google-button-container {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+/* Login-only presentation: shared signup, dashboard and auth behavior stay intact. */
+.auth-main:has(.login-design-card) {
+  background: radial-gradient(ellipse at 50% 0, #f0ecff66, transparent 60%), #f8f9fe;
+}
+.auth-main:has(.login-design-card) .auth-form-wrap {
+  width: min(100%, 420px);
+  padding: 40px 0;
+}
+.auth-main:has(.login-design-card) .auth-top a { color: #6843ed; }
+.auth-form-content.login-design-card {
+  --login-surface: #fff;
+  --login-ink: #20243a;
+  --login-muted: #7c85a2;
+  --login-border: #e3e6f2;
+  padding: 32px 28px 25px;
+  background: var(--login-surface);
+  border: 1px solid #efeff9;
+  border-radius: 12px;
+  box-shadow: 0 12px 44px #41317c0a, 0 2px 8px #41317c03;
+}
+.login-design-card .auth-form-icon {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 17px;
+  border: 0;
+  border-radius: 50%;
+  background: #eee9ff;
+  color: #6840f2;
+}
+.login-design-card > .eyebrow {
+  margin-bottom: 8px;
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  text-align: center;
+  color: #7958df;
+}
+.auth-form-content.login-design-card h2 {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.55px;
+  text-align: center;
+  color: var(--login-ink);
+}
+.login-design-card .auth-description {
+  margin: 8px 0 26px;
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--login-muted);
+}
+.login-design-card .auth-form { gap: 18px; }
+.login-design-card .field > label { font-size: 11px; color: var(--login-ink); }
+.login-design-card .login-input-field { position: relative; }
+.login-design-card .login-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  transform: translateY(-50%);
+  color: #8b8fb1;
+  pointer-events: none;
+}
+.auth-form-content.login-design-card .auth-form .input {
+  min-height: 44px;
+  padding: 11px 39px;
+  border: 1px solid var(--login-border);
+  border-radius: 7px;
+  background: var(--login-surface);
+  color: var(--login-ink);
+  font-size: 12px;
+}
+.auth-form-content.login-design-card .auth-form .input::placeholder { color: #969db5; }
+.auth-form-content.login-design-card .auth-form .input:focus {
+  border-color: #967af4;
+  box-shadow: 0 0 0 3px #7044ef0c;
+}
+.auth-form-content.login-design-card .auth-form input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--login-surface) inset;
+  -webkit-text-fill-color: var(--login-ink);
+  caret-color: var(--login-ink);
+}
+.login-design-card .password-toggle { top: 11px; right: 11px; color: #8b8fb1; }
+.login-design-card .auth-form > .field-hint {
+  margin-top: -4px;
+  font-size: 10px;
+  text-align: right;
+  color: var(--login-muted);
+}
+.login-design-card .auth-submit {
+  min-height: 43px;
+  border-radius: 7px;
+  background: linear-gradient(105deg, #693cf3, #5532e7);
+  box-shadow: 0 3px 10px #603be522;
+  font-size: 12px;
+  font-weight: 600;
+}
+.login-design-card .auth-submit:hover:not(:disabled) {
+  background: linear-gradient(105deg, #6031e9, #4928d6);
+  box-shadow: 0 4px 13px #603be530;
+}
+.login-design-card button:focus-visible, .login-design-card a:focus-visible {
+  outline: 2px solid #8968f2;
+  outline-offset: 3px;
+}
+.login-design-card .auth-switch {
+  margin: 23px 0 13px;
+  padding-top: 20px;
+  border-top: 1px solid var(--login-border);
+  font-size: 11px;
+  color: var(--login-muted);
+}
+.login-design-card .auth-switch a { color: #6942ed; }
+.login-design-card .auth-note {
+  padding-top: 0;
+  border-top: 0;
+  color: var(--login-muted);
+  font-size: 10px;
+  line-height: 1.8;
+}
+.login-design-card .auth-note + .auth-note { margin-top: 16px; }
+.login-design-card .form-error { padding: 12px; font-size: 11px; overflow-wrap: anywhere; }
+.dark .auth-main:has(.login-design-card) { background: #101827; }
+.dark .auth-form-content.login-design-card {
+  --login-surface: #182238;
+  --login-ink: #e6eafa;
+  --login-muted: #a4aec9;
+  --login-border: #35415b;
+  border-color: #2c3850;
+  box-shadow: 0 12px 44px #00000020;
+}
+.dark .login-design-card .auth-form-icon { background: #34295a; color: #ba9cff; }
+.dark .login-design-card .auth-switch a, .dark .login-design-card > .eyebrow { color: #b89bff; }
+@media (max-width: 767px) {
+  .auth-main:has(.login-design-card) { padding: 22px 16px; }
+  .auth-main:has(.login-design-card) .auth-form-wrap { padding: 30px 0; }
+  .auth-form-content.login-design-card { padding: 28px 24px 23px; }
+}
+
+.login-design-card .login-google-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 18px;
+  color: var(--login-muted);
+  font-size: 11px;
+}
+.login-design-card .login-google-divider::before,
+.login-design-card .login-google-divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--login-border);
+}
+.login-design-card .login-google-button,
+.login-design-card .login-google-button:disabled {
+  width: 100%;
+  min-height: 43px;
+  gap: 10px;
+  border: 1px solid var(--login-border);
+  border-radius: 7px;
+  background: var(--login-surface);
+  color: var(--login-ink);
+  box-shadow: none;
+  opacity: 1;
+  font-size: 12px;
+  font-weight: 500;
+}
+.login-design-card .login-google-button svg { flex-shrink: 0; }
+.login-design-card .login-google-note {
+  margin: 8px 0 0;
+  color: var(--login-muted);
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
