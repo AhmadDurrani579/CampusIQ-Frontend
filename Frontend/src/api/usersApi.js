@@ -40,22 +40,23 @@ export async function updateMe({ full_name }) {
 // 3. Get all registered users
 // GET /api/v1/admin/users
 // ========================================
+
 export async function getAllUsers(params = {}) {
   if (isMockMode) {
     return mockService.getUsers(params);
   }
 
-  // IMPORTANT:
-  // Confirm this endpoint exists in Swagger.
-  const response = await axiosClient.get(
-    '/admin/users',
-    {
-      params: {
-        page: params.page ?? 1,
-        page_size: params.page_size ?? 20
-      }
-    }
-  );
+  const response = await axiosClient.get('/admin/users', {
+    params: {
+      page: params.page ?? 1,
+      page_size: params.page_size ?? 20,
+      ...(params.search ? { search: params.search } : {}),
+      ...(params.role ? { role: params.role } : {}),
+      ...(params.approval_status
+        ? { approval_status: params.approval_status }
+        : {}),
+    },
+  });
 
   return response.data;
 }

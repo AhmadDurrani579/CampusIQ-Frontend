@@ -1,9 +1,66 @@
-import { CapabilityUnavailableError } from '../utils/apiErrors';
+
+import axiosClient from './axiosClient';
 import { isMockMode } from './mode';
 import { mockService } from '../mock/service';
 
-export const capabilities=Object.freeze({list:isMockMode,publish:isMockMode});
-export async function getAnnouncements(...args){if(isMockMode)return mockService.getAnnouncements(...args);throw new CapabilityUnavailableError('Announcements');}
-export async function publishAnnouncement(...args){if(isMockMode)return mockService.publishAnnouncement(...args);throw new CapabilityUnavailableError('Announcements');}
-export default {capabilities,getAnnouncements,publishAnnouncement};
+export const capabilities = Object.freeze({
+  list: true,
+  publish: true,
+});
 
+export async function getAnnouncements() {
+  if (isMockMode) {
+    return mockService.getAnnouncements();
+  }
+
+  const { data } = await axiosClient.get('/announcements');
+  return data;
+}
+
+export async function getAdminAnnouncements() {
+  if (isMockMode) {
+    return mockService.getAnnouncements();
+  }
+
+  const { data } = await axiosClient.get('/admin/announcements');
+  return data;
+}
+
+export async function publishAnnouncement(payload) {
+  if (isMockMode) {
+    return mockService.publishAnnouncement(payload);
+  }
+
+  const { data } = await axiosClient.post(
+    '/admin/announcements',
+    payload
+  );
+
+  return data;
+}
+
+export async function updateAnnouncement(id, payload) {
+  const { data } = await axiosClient.patch(
+    `/admin/announcements/${id}`,
+    payload
+  );
+
+  return data;
+}
+
+export async function deleteAnnouncement(id) {
+  const { data } = await axiosClient.delete(
+    `/admin/announcements/${id}`
+  );
+
+  return data;
+}
+
+export default {
+  capabilities,
+  getAnnouncements,
+  getAdminAnnouncements,
+  publishAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+};

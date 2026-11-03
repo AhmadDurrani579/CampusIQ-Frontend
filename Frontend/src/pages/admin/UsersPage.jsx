@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -88,11 +88,22 @@ function RealUsersPage() {
 
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('ALL');
+  const [approvalFilter, setApprovalFilter] = useState('ALL');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   const [page, setPage] = useState(1);
   const [reloadKey, setReloadKey] = useState(0);
 
   const pageSize = 20;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(search.trim());
+    }, 350);
+
+    return () => clearTimeout(timeout);
+  }, [search]);
 
   // ========================================
   // Get all users from FastAPI
@@ -107,7 +118,10 @@ function RealUsersPage() {
       try {
         const response = await usersApi.getAllUsers({
           page,
-          page_size: pageSize
+          page_size: pageSize,
+          search: debouncedSearch || undefined,
+          role: roleFilter === 'ALL' ? undefined : roleFilter,
+          approval_status: approvalFilter === 'ALL' ? undefined : approvalFilter
         });
 
         const result = extractUsers(response);
@@ -158,42 +172,7 @@ function RealUsersPage() {
     return () => {
       cancelled = true;
     };
-  }, [page, reloadKey]);
-
-  // ========================================
-  // Search and filter loaded users
-  // ========================================
-  const filteredUsers = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-
-    return users.filter(user => {
-      const name = String(user.full_name ?? '');
-      const email = String(user.email ?? '');
-      const role = String(user.role ?? '');
-
-      const matchesSearch =
-        !keyword ||
-        name.toLowerCase().includes(keyword) ||
-        email.toLowerCase().includes(keyword);
-
-      const matchesRole =
-        roleFilter === 'ALL' ||
-        role.toUpperCase() === roleFilter;
-
-      return matchesSearch && matchesRole;
-    });
-  }, [users, search, roleFilter]);
-
-  const availableRoles = useMemo(() => {
-    return [
-      ...new Set(
-        users
-          .map(user => user.role)
-          .filter(Boolean)
-          .map(role => String(role).toUpperCase())
-      )
-    ].sort();
-  }, [users]);
+  }, [page, debouncedSearch, roleFilter, approvalFilter, reloadKey]);
 
   // ========================================
   // Refresh users
@@ -236,7 +215,7 @@ function RealUsersPage() {
             </h2>
 
             <p className="text-sm text-muted mt-1">
-              Registered students, instructors,
+              Registered students, department staff,
               department heads and administrators.
             </p>
           </div>
@@ -261,26 +240,41 @@ function RealUsersPage() {
               style={{ paddingLeft: 40 }}
               placeholder="Search users by name or email..."
               value={search}
-              onChange={event =>
-                setSearch(event.target.value)
-              }
+              onChange={event => {
+                setSearch(event.target.value);
+                setPage(1);
+              }}
             />
           </div>
 
           <select
             className="input"
+            aria-label="Filter by role"
             value={roleFilter}
-            onChange={event =>
-              setRoleFilter(event.target.value)
-            }
+            onChange={event => {
+              setRoleFilter(event.target.value);
+              setPage(1);
+            }}
           >
             <option value="ALL">All roles</option>
-
-            {availableRoles.map(role => (
-              <option key={role} value={role}>
-                {role.replaceAll('_', ' ')}
-              </option>
+            {['STUDENT', 'HOD', 'EXAM_STAFF', 'FINANCE_STAFF', 'IT_STAFF', 'ADMIN'].map(role => (
+              <option key={role} value={role}>{role.replaceAll('_', ' ')}</option>
             ))}
+          </select>
+
+          <select
+            className="input"
+            aria-label="Filter by approval status"
+            value={approvalFilter}
+            onChange={event => {
+              setApprovalFilter(event.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="ALL">All approval statuses</option>
+            <option value="APPROVED">Approved</option>
+            <option value="PENDING">Pending</option>
+            <option value="REJECTED">Rejected</option>
           </select>
         </div>
 
@@ -316,13 +310,13 @@ function RealUsersPage() {
             </Button>
           </div>
 
-        ) : filteredUsers.length === 0 ? (
+        ) : users.length === 0 ? (
 
           /* No users */
           <EmptyState
             icon={Users}
             title="No users found"
-            description="No users match your search or filters on this page."
+            description="No users match the selected search and filters."
           />
 
         ) : (
@@ -337,13 +331,15 @@ function RealUsersPage() {
                   <th className="p-3">Name</th>
                   <th className="p-3">Email</th>
                   <th className="p-3">Role</th>
-                  <th className="p-3">Status</th>
+                  <th className="p-3">Department</th>
+                  <th className="p-3">Approval</th>
+                  <th className="p-3">Account</th>
                   <th className="p-3">Registered</th>
                 </tr>
               </thead>
 
               <tbody>
-                {filteredUsers.map(user => (
+                {users.map(user => (
                   <tr
                     key={user.id}
                     className="border-b hover:bg-gray-50/50"
@@ -367,6 +363,12 @@ function RealUsersPage() {
                     </td>
 
                     <td className="p-3">
+                      {user.department_name || (user.department_id != null
+                        ? `Department #${user.department_id}`
+                        : 'Unassigned')}
+                    </td>
+
+                    <td className="p-3">
                       <Badge
                         tone={
                           user.approval_status === 'APPROVED'
@@ -377,6 +379,12 @@ function RealUsersPage() {
                         {user.approval_status ||
                           user.status ||
                           'Unknown'}
+                      </Badge>
+                    </td>
+
+                    <td className="p-3">
+                      <Badge tone={user.is_active ? 'green' : 'warning'}>
+                        {user.is_active ? 'Active' : 'Inactive'}
                       </Badge>
                     </td>
 
@@ -394,7 +402,7 @@ function RealUsersPage() {
         {!loading && !error && total > 0 && (
           <div className="flex items-center justify-between mt-5 gap-3">
             <p className="text-sm text-muted">
-              Page {page} · {total} total users
+              Page {page} of {totalPages} · {total} matching users
             </p>
 
             <div className="flex gap-2">
@@ -412,7 +420,7 @@ function RealUsersPage() {
               <Button
                 variant="secondary"
                 size="sm"
-                disabled={page * pageSize >= total}
+                disabled={page >= totalPages}
                 onClick={() =>
                   setPage(previous => previous + 1)
                 }
@@ -424,8 +432,7 @@ function RealUsersPage() {
         )}
 
         <p className="text-xs text-muted mt-4">
-          Search and role filters apply to the currently
-          loaded page.
+          Search, role and approval filters apply to all registered users.
         </p>
 
       </Card>

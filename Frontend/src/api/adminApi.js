@@ -56,6 +56,22 @@ export async function getPendingUsers() {
   return items;
 }
 
+
+ // ========================================
+ // Get Admin Dashboard Summary
+ // GET /api/v1/admin/dashboard/summary
+ // ========================================
+ export async function getDashboardSummary(days = 30) {
+   const response = await axiosClient.get(
+     '/admin/dashboard/summary',
+     {
+       params: { days }
+     }
+   );
+
+   return response.data;
+ }
+
 // ========================================
 // 2. Approve pending user - REAL API
 // PATCH /api/v1/admin/users/{user_id}/approve
@@ -98,6 +114,7 @@ export async function rejectUser(id) {
 // ========================================
 export default {
   getPendingUsers,
+  getDashboardSummary,
   approveUser,
   rejectUser
 };

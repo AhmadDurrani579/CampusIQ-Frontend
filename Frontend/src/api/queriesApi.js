@@ -1,134 +1,79 @@
-
 import axiosClient from './axiosClient';
 import { CapabilityUnavailableError } from '../utils/apiErrors';
 import { isMockMode } from './mode';
 import { mockService } from '../mock/service';
 
-// ========================================
-// 1. Get all administrator queries
-// ========================================
 export async function getQueries(params = {}) {
-  if (isMockMode) {
-    return mockService.getQueries(params);
-  }
-
-  const response = await axiosClient.get('/admin/queries', {
-    params: {
-      page: params.page ?? 1,
-      page_size: params.page_size ?? 20
-    }
-  });
-
-  return response.data;
+  if (isMockMode) return mockService.getQueries(params);
+  const { data } = await axiosClient.get('/admin/queries', { params: { page: params.page ?? 1, page_size: params.page_size ?? 20 } });
+  return data;
 }
 
-// ========================================
-// 2. Get logged-in student's queries
-// ========================================
 export async function getMyQueries(params = {}) {
-  if (isMockMode) {
-    return mockService.getQueries(params);
-  }
-
-  // Verify this endpoint in Swagger separately.
-  const response = await axiosClient.get('/queries/my', {
-    params: {
-      page: params.page ?? 1,
-      page_size: params.page_size ?? 20
-    }
-  });
-
-  return response.data;
+  if (isMockMode) return mockService.getQueries(params);
+  const { data } = await axiosClient.get('/queries/my', { params: { page: params.page ?? 1, page_size: params.page_size ?? 20 } });
+  return data;
 }
 
-// ========================================
-// 3. Get single query by ID - REAL API
-// ========================================
 export async function getQuery(queryId) {
-  if (isMockMode) {
-    return mockService.getQuery(queryId);
-  }
+  if (isMockMode) return mockService.getQuery(queryId);
+  if (queryId === undefined || queryId === null || String(queryId).trim() === '') throw new Error('Query ID is required');
+  const { data } = await axiosClient.get(`/queries/${encodeURIComponent(queryId)}`);
+  return data;
+}
 
-  if (
-    queryId === undefined ||
-    queryId === null ||
-    String(queryId).trim() === ''
-  ) {
-    throw new Error('Query ID is required');
-  }
+export async function createQuery(body) {
+  if (isMockMode) return mockService.createQuery(body);
+  const { data } = await axiosClient.post('/queries', { message: body.message });
+  return data;
+}
 
-  const response = await axiosClient.get(
-    `/queries/${encodeURIComponent(queryId)}`
+export async function generateReplyDraft(queryId) {
+  const response = await axiosClient.post(
+    `/queries/${encodeURIComponent(queryId)}/generate-draft`
   );
 
   return response.data;
 }
 
-// ========================================
-// 4. Create a new student query
-// ========================================
-export async function createQuery(data) {
-  if (isMockMode) {
-    return mockService.createQuery(data);
-  }
-
-  const response = await axiosClient.post('/queries', {
-    message: data.message
-  });
-
-  return response.data;
+export async function getQueryMessages(queryId) {
+  if (isMockMode) return [];
+  const { data } = await axiosClient.get(`/queries/${encodeURIComponent(queryId)}/messages`);
+  return data;
 }
 
-// ========================================
-// 5. Other operations (mock mode only)
-// ========================================
+export async function sendReply(queryId, message) {
+  if (isMockMode) return mockService.sendReply(queryId, message);
+  const { data } = await axiosClient.post(`/queries/${encodeURIComponent(queryId)}/reply`, { message });
+  return data;
+}
+
+export async function updateQueryStatus(queryId, status) {
+  if (isMockMode) return mockService.updateQuery(queryId, { status });
+  const { data } = await axiosClient.patch(`/queries/${encodeURIComponent(queryId)}/status`, { status });
+  return data;
+}
+
 const operation = name => async (...args) => {
-  if (isMockMode) {
-    return mockService[name](...args);
-  }
-
-  throw new CapabilityUnavailableError(
-    'Query management'
-  );
+  if (isMockMode) return mockService[name](...args);
+  throw new CapabilityUnavailableError('Query management');
 };
 
 export const updateQuery = operation('updateQuery');
 export const generateDraft = operation('generateDraft');
 export const getDrafts = operation('getDrafts');
 export const saveDraft = operation('saveDraft');
-export const sendReply = operation('sendReply');
 export const escalateQuery = operation('escalateQuery');
 export const reassignQuery = operation('reassignQuery');
 
-// ========================================
-// 6. Frontend capabilities
-// ========================================
 export const capabilities = Object.freeze({
-  list: true,
-  myQueries: true,
-  detail: true,
-  create: true,
-  update: isMockMode,
-  drafts: isMockMode,
-  escalate: isMockMode,
-  reply: isMockMode,
-  reassign: isMockMode
+  list: true, myQueries: true, detail: true, create: true,
+  update: !isMockMode, drafts: isMockMode, escalate: isMockMode,
+  reply: true, reassign: isMockMode,
 });
 
-// ========================================
-// 7. Default export
-// ========================================
 export default {
-  capabilities,
-  getQueries,
-  getMyQueries,
-  getQuery,
-  createQuery,
-  updateQuery,
-  generateDraft,
-  getDrafts,
-  saveDraft,
-  sendReply,
-  escalateQuery,
-  reassignQuery
+  capabilities, getQueries, getMyQueries, getQuery, createQuery,
+  getQueryMessages, sendReply, updateQueryStatus, updateQuery,
+  generateDraft, getDrafts, saveDraft, escalateQuery, reassignQuery,
 };

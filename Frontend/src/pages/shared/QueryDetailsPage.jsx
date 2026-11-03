@@ -23,8 +23,7 @@ import {
 } from '../../components/ui';
 
 import QueryStatus, {
-  PriorityBadge,
-  QueryTimeline
+  PriorityBadge
 } from '../../components/common/QueryStatus';
 
 import FeatureNotice from '../../components/common/FeatureNotice';
@@ -33,6 +32,10 @@ import { isMockMode } from '../../api/mode';
 
 import {
   getQuery,
+  getQueryMessages,
+  sendReply,
+  updateQueryStatus,
+  generateReplyDraft,
   capabilities
 } from '../../api/queriesApi';
 
@@ -91,6 +94,10 @@ function normalizeQuery(response) {
       data.status || 'PENDING_CLASSIFICATION',
 
     date: formatDate(data.created_at),
+    createdAt: data.created_at,
+    respondedAt: data.responded_at ?? null,
+    resolvedAt: data.resolved_at ?? null,
+    departmentId: data.department_id,
 
     assignedTo: data.assigned_to ?? null,
 
@@ -127,6 +134,99 @@ function OriginalQueryDetailsPage({
   const [loading, setLoading] = useState(!preview);
   const [error, setError] = useState('');
   const [draft, setDraft] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [messagesError, setMessagesError] = useState('');
+  const [actionError, setActionError] = useState('');
+  const [actionSuccess, setActionSuccess] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [statusUpdating, setStatusUpdating] = useState(false);
+  const [refreshIndex, setRefreshIndex] = useState(0);
+  const canManage = ['FINANCE_STAFF', 'EXAM_STAFF', 'IT_STAFF', 'HOD', 'ADMIN'].includes(role);
+  const [generatingDraft, setGeneratingDraft] = useState(false);
+  const [draftError, setDraftError] = useState('');
+  const [studentReply, setStudentReply] = useState('');
+  const [sendingStudentReply, setSendingStudentReply] = useState(false);
+  const [studentReplyError, setStudentReplyError] = useState('');
+
+  async function handleGenerateDraft() {
+    setGeneratingDraft(true);
+    setDraftError('');
+
+    try {
+      const result = await generateReplyDraft(id);
+      setDraft(result.draft);
+    } catch (error) {
+      setDraftError(
+        error.response?.data?.detail ||
+        'Unable to generate an AI draft.'
+      );
+    } finally {
+      setGeneratingDraft(false);
+    }
+  }
+
+  async function refreshDetails() {
+    setRefreshIndex(index => index + 1);
+  }
+
+  async function handleReply() {
+    if (!canManage || !currentQuery || !draft.trim()) return;
+    if (!window.confirm('Send this reply to the student?')) return;
+    setSubmitting(true);
+    setActionError('');
+    setActionSuccess('');
+    try {
+      await sendReply(currentQuery.id, draft.trim());
+      setDraft('');
+      setActionSuccess('Reply sent successfully.');
+      await refreshDetails();
+    } catch (err) {
+      setActionError(err?.response?.data?.detail || err.message || 'Could not send reply.');
+    } finally {
+      setSubmitting(false);
+    }
+  } 
+
+  async function handleStudentReply() {
+    const message = studentReply.trim();
+
+    if (!message || sendingStudentReply || !id) return;
+
+    setSendingStudentReply(true);
+    setStudentReplyError('');
+
+    try {
+      await sendReply(id, message);
+      setStudentReply('');
+      window.location.reload();
+    } catch (error) {
+      setStudentReplyError(
+        error.response?.data?.detail ||
+        error.message ||
+        'Unable to send reply.'
+      );
+    } finally {
+      setSendingStudentReply(false);
+    }
+  }
+
+  async function handleStatusUpdate() {
+    if (!canManage || !currentQuery) return;
+    const nextStatus = currentQuery.status === 'IN_PROGRESS' ? 'RESOLVED' : 'IN_PROGRESS';
+    if (!window.confirm(`Change query status to ${nextStatus}?`)) return;
+    setStatusUpdating(true);
+    setActionError('');
+    setActionSuccess('');
+    try {
+      await updateQueryStatus(currentQuery.id, nextStatus);
+      setActionSuccess(`Query status updated to ${nextStatus}.`);
+      await refreshDetails();
+    } catch (err) {
+      setActionError(err?.response?.data?.detail || err.message || 'Could not update query status.');
+    } finally {
+      setStatusUpdating(false);
+    }
+  }
 
   const back = preview
     ? `/preview?role=${role}&page=queries`
@@ -162,6 +262,14 @@ function OriginalQueryDetailsPage({
 
       try {
         const response = await getQuery(id);
+        let conversation = [];
+        let conversationError = '';
+        try {
+          const result = await getQueryMessages(id);
+          conversation = Array.isArray(result) ? result : (result?.messages ?? []);
+        } catch (err) {
+          conversationError = err?.response?.data?.detail || err.message || 'Unable to load replies.';
+        }
 
         console.log('Single query response:', response);
 
@@ -169,6 +277,8 @@ function OriginalQueryDetailsPage({
 
         if (!cancelled) {
           setQuery(normalized);
+          setMessages(conversation);
+          setMessagesError(conversationError);
         }
       } catch (err) {
         console.error('Get query error:', err);
@@ -203,9 +313,18 @@ function OriginalQueryDetailsPage({
     return () => {
       cancelled = true;
     };
-  }, [id, preview]);
+  }, [id, preview, refreshIndex]);
 
   const currentQuery = preview ? previewQuery : query;
+  const canReply = canManage && currentQuery && !['PENDING_CLASSIFICATION', 'RESOLVED', 'CLOSED'].includes(currentQuery.status);
+  const nextStatus = currentQuery?.status === 'IN_PROGRESS' ? 'RESOLVED' : 'IN_PROGRESS';
+  const canChangeStatus = canManage && currentQuery && ['OPEN', 'ESCALATED', 'IN_PROGRESS'].includes(currentQuery.status);
+  const steps = currentQuery ? [
+    { label: 'Submitted', complete: true, note: currentQuery.date },
+    { label: 'AI classified / routed', complete: !['PENDING_CLASSIFICATION'].includes(currentQuery.status) && !currentQuery.needsManualReview, note: currentQuery.department },
+    { label: 'In progress', complete: ['IN_PROGRESS', 'RESOLVED', 'CLOSED'].includes(currentQuery.status), note: currentQuery.respondedAt ? formatDate(currentQuery.respondedAt) : 'Awaiting staff response' },
+    { label: 'Resolved', complete: ['RESOLVED', 'CLOSED'].includes(currentQuery.status), note: currentQuery.resolvedAt ? formatDate(currentQuery.resolvedAt) : 'Not resolved' },
+  ] : [];
 
   // ========================================
   // UI
@@ -385,15 +504,92 @@ function OriginalQueryDetailsPage({
                 </div>
               )}
 
-              {!preview && (
-                <p className="muted text-sm">
-                  Additional conversation messages are not
-                  yet connected to the backend.
-                </p>
-              )}
+              {!preview && messagesError && <p className="muted text-sm" role="alert">{messagesError}</p>}
+              {!preview && messages.map((item, index) => (
+                <div className="conversation staff-conversation" key={item.id ?? index}>
+                  <span className="avatar avatar-green"><UserRound size={17} /></span>
+                  <div>
+                    <strong>{item.sender_name || item.sender?.full_name || `User #${item.sender_id ?? '?'}`} <Badge>Reply</Badge></strong>
+                    <p>{item.message ?? item.body ?? ''}</p>
+                    <small>{formatDate(item.created_at)}</small>
+                  </div>
+                </div>
+              ))}
             </Card>
 
-            {/* Reply workspace for staff */}
+
+            {/* ====================================== */}
+            {/* Student Reply Workspace */}
+            {/* ====================================== */}
+            {!preview && role === 'STUDENT' && (
+              <Card className="padded-card">
+                <div className="section-title">
+                  <span className="section-icon">
+                    <Send size={20} />
+                  </span>
+
+                  <div>
+                    <h2>Reply to Department</h2>
+                    <p>
+                      Continue your conversation with the department.
+                    </p>
+                  </div>
+
+                  <Badge tone="green">Live reply API</Badge>
+                </div>
+
+                {['OPEN', 'IN_PROGRESS', 'ESCALATED'].includes(
+                  currentQuery.status
+                ) ? (
+                  <>
+                    <Field
+                      label="Your reply"
+                      htmlFor="student-reply"
+                      hint="Your reply will be visible to the department handling your query."
+                    >
+                      <textarea
+                        id="student-reply"
+                        rows={5}
+                        maxLength={5000}
+                        value={studentReply}
+                        onChange={e => setStudentReply(e.target.value)}
+                        placeholder="Write your reply to the department..."
+                        disabled={sendingStudentReply}
+                      />
+                    </Field>
+
+                    {studentReplyError && (
+                      <p role="alert" className="form-error">
+                        {studentReplyError}
+                      </p>
+                    )}
+
+                    <div className="button-row">
+                      <Button
+                        disabled={
+                          sendingStudentReply ||
+                          !studentReply.trim()
+                        }
+                        onClick={handleStudentReply}
+                      >
+                        <Send size={15} />
+                        {sendingStudentReply
+                          ? 'Sending reply...'
+                          : 'Send Reply'}
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <p className="muted text-sm">
+                    This query is not accepting replies in its current status.
+                  </p>
+                )}
+              </Card>
+            )}
+
+            {/* ====================================== */}
+            {/* Staff Reply Workspace */}
+            {/* ====================================== */}
             {role !== 'STUDENT' && (
               <Card className="padded-card">
                 <div className="section-title">
@@ -408,36 +604,90 @@ function OriginalQueryDetailsPage({
                     </p>
                   </div>
 
-                  <Badge tone="amber">API pending</Badge>
+                  <Badge tone="green">Live reply API</Badge>
                 </div>
 
-                <Button variant="secondary" disabled>
+                <Button
+                  variant="secondary"
+                  disabled={
+                    preview ||
+                    generatingDraft ||
+                    !['OPEN', 'IN_PROGRESS'].includes(
+                      currentQuery.status
+                    )
+                  }
+                  onClick={handleGenerateDraft}
+                >
                   <Sparkles size={15} />
-                  Generate AI draft
+                  {generatingDraft
+                    ? 'Generating draft...'
+                    : 'Generate AI draft'}
                 </Button>
+
+                {draftError && (
+                  <p role="alert" className="form-error">
+                    {draftError}
+                  </p>
+                )}
 
                 <Field
                   label="Reply draft"
                   htmlFor="reply-draft"
-                  hint="Sending and AI generation are not connected."
+                  hint="Generate an AI suggestion or write your own reply. Staff must approve before sending."
                 >
                   <textarea
                     id="reply-draft"
                     rows={5}
+                    maxLength={5000}
                     value={draft}
                     onChange={e => setDraft(e.target.value)}
                     placeholder="Write your response..."
+                    disabled={submitting}
                   />
                 </Field>
 
+                {actionError && (
+                  <p role="alert" className="form-error">
+                    {actionError}
+                  </p>
+                )}
+
+                {actionSuccess && (
+                  <p role="status" className="muted text-sm">
+                    {actionSuccess}
+                  </p>
+                )}
+
                 <div className="button-row">
-                  <Button disabled>
+                  <Button
+                    disabled={
+                      preview ||
+                      !canReply ||
+                      !draft.trim() ||
+                      submitting ||
+                      statusUpdating
+                    }
+                    onClick={handleReply}
+                  >
                     <Send size={15} />
-                    Approve & send reply
+                    {submitting
+                      ? 'Sending...'
+                      : 'Approve & send reply'}
                   </Button>
 
-                  <Button variant="secondary" disabled>
-                    Update status
+                  <Button
+                    variant="secondary"
+                    disabled={
+                      preview ||
+                      !canChangeStatus ||
+                      submitting ||
+                      statusUpdating
+                    }
+                    onClick={handleStatusUpdate}
+                  >
+                    {statusUpdating
+                      ? 'Updating...'
+                      : `Change to ${nextStatus.replaceAll('_', ' ')}`}
                   </Button>
 
                   {role === 'HOD' && (
@@ -448,6 +698,7 @@ function OriginalQueryDetailsPage({
                 </div>
               </Card>
             )}
+
           </div>
 
           {/* Progress sidebar */}
@@ -460,9 +711,19 @@ function OriginalQueryDetailsPage({
                 : 'Current query status'}
             </p>
 
-            <QueryTimeline
-              status={currentQuery.status}
-            />
+            <ol style={{ listStyle: 'none', padding: 0, margin: '24px 0' }}>
+              {steps.map((step, index) => (
+                <li key={step.label} style={{ display: 'flex', gap: 12, paddingBottom: 22 }}>
+                  <span aria-hidden="true" style={{ color: step.complete ? '#0f9d79' : '#94a3b8', fontSize: 20 }}>
+                    {step.complete ? '●' : '○'}
+                  </span>
+                  <div>
+                    <strong style={{ color: step.complete ? 'inherit' : '#94a3b8' }}>{step.label}</strong>
+                    <p className="muted text-sm">{step.note}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
 
             <div className="resolution-note">
               <ShieldCheck size={18} />

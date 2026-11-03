@@ -1,9 +1,49 @@
-import { CapabilityUnavailableError } from '../utils/apiErrors';
-import { isMockMode } from './mode';
-import { mockService } from '../mock/service';
-const operation=name=>async(...args)=>{if(isMockMode)return mockService[name](...args);throw new CapabilityUnavailableError('Notifications');};
-export const capabilities=Object.freeze({list:isMockMode,markRead:isMockMode,markAllRead:isMockMode});
-export const getNotifications=operation('getNotifications');
-export const markRead=operation('markRead');
-export const markAllRead=operation('markAllRead');
-export default {capabilities,getNotifications,markRead,markAllRead};
+
+import axiosClient from './axiosClient';
+
+// GET /api/v1/notifications
+export async function getNotifications(params = {}) {
+  const { data } = await axiosClient.get('/notifications', {
+    params: {
+      page: params.page ?? 1,
+      page_size: params.page_size ?? 20,
+      unread_only: params.unread_only ?? false,
+    },
+  });
+
+  return data;
+}
+
+// GET /api/v1/notifications/unread-count
+export async function getUnreadCount() {
+  const { data } = await axiosClient.get(
+    '/notifications/unread-count'
+  );
+
+  return data;
+}
+
+// PATCH /api/v1/notifications/{id}/read
+export async function markNotificationRead(id) {
+  const { data } = await axiosClient.patch(
+    `/notifications/${id}/read`
+  );
+
+  return data;
+}
+
+// PATCH /api/v1/notifications/read-all
+export async function markAllNotificationsRead() {
+  const { data } = await axiosClient.patch(
+    '/notifications/read-all'
+  );
+
+  return data;
+}
+
+export default {
+  getNotifications,
+  getUnreadCount,
+  markNotificationRead,
+  markAllNotificationsRead,
+};

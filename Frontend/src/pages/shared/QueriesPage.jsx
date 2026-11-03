@@ -33,6 +33,7 @@ import {
 } from '../../api/queriesApi';
 
 import MockQueriesPage from '../mock/MockQueriesPage';
+import axiosClient from '../../api/axiosClient';
 
 // --------------------------------------
 // Format dates
@@ -166,8 +167,13 @@ function OriginalQueriesPage({
     !escalations &&
     role === 'STUDENT';
 
+  const isLiveStaff =
+    !preview &&
+    !escalations &&
+    ['FINANCE_STAFF', 'EXAM_STAFF', 'IT_STAFF', 'HOD'].includes(role);
+
   const isLive =
-    isLiveAdmin || isLiveStudent;
+    isLiveAdmin || isLiveStudent || isLiveStaff;
 
   // --------------------------------------
   // Fetch real queries
@@ -202,6 +208,12 @@ function OriginalQueriesPage({
             page: 1,
             page_size: 20
           });
+        }
+
+        // Shared department API scopes results by authenticated user's department.
+        if (isLiveStaff) {
+          const { data } = await axiosClient.get('/queries/department');
+          response = data;
         }
 
         const result = extractQueries(response);
@@ -251,7 +263,7 @@ function OriginalQueriesPage({
     return () => {
       cancelled = true;
     };
-  }, [isLive, isLiveAdmin, isLiveStudent]);
+  }, [isLive, isLiveAdmin, isLiveStudent, isLiveStaff]);
 
   // --------------------------------------
   // Page title
@@ -261,7 +273,9 @@ function OriginalQueriesPage({
     : {
         ADMIN: 'All queries',
         STUDENT: 'My queries',
-        INSTRUCTOR: 'Assigned queries',
+        FINANCE_STAFF: 'Department queries',
+        EXAM_STAFF: 'Department queries',
+        IT_STAFF: 'Department queries',
         HOD: 'Department queries'
       }[role] || 'Queries';
 
@@ -314,7 +328,11 @@ function OriginalQueriesPage({
       label: 'Subject',
       render: r => (
         <div className="query-subject">
-          <strong>{r.subject}</strong>
+          {preview ? (
+            <strong>{r.subject}</strong>
+          ) : (
+            <Link to={`${href('queries')}/${r.id}`}>{r.subject}</Link>
+          )}
           <small>{r.student}</small>
         </div>
       )

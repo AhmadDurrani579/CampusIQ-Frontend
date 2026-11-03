@@ -8,6 +8,8 @@ import { isMockMode } from '../../api/mode';
 import { classifyQuery } from '../../api/aiApi';
 import { getApiErrorMessage } from '../../utils/apiErrors';
 import { MockPlannedAdminPage } from '../mock/MockAdminPages';
+import StaffAssignmentsPage from './StaffAssignmentsPage';
+import AuditLogsPage from './AuditLogsPage';
 
 const pageInfo = {
   routing: ['AI routing', 'A transparent view of how queries reach the right people.', GitBranch],
@@ -15,12 +17,35 @@ const pageInfo = {
   'audit-logs': ['Audit logs', 'An accountable record of your university workspace.', ClipboardList]
 };
 
-export default function PlannedAdminPage({ module, preview = false, demoData }) {
-  if (isMockMode && !preview) return <MockPlannedAdminPage module={module} />;
-  if (module === 'routing' && !preview) return <LiveAIRoutingPage />;
-  return <OtherAdminModule module={module} preview={preview} demoData={demoData} />;
-}
+export default function PlannedAdminPage({
+  module,
+  preview = false,
+  demoData,
+}) {
+  if (isMockMode && !preview) {
+    return <MockPlannedAdminPage module={module} />;
+  }
 
+  if (module === 'routing' && !preview) {
+    return <LiveAIRoutingPage />;
+  }
+
+  if (module === 'staff-assignments' && !preview) {
+    return <StaffAssignmentsPage />;
+  }
+
+  if (module === 'audit-logs' && !preview) {
+    return <AuditLogsPage />;
+  }
+
+  return (
+    <OtherAdminModule
+      module={module}
+      preview={preview}
+      demoData={demoData}
+    />
+  );
+}
 function LiveAIRoutingPage() {
   const [query, setQuery] = useState('');
   const [result, setResult] = useState(null);
