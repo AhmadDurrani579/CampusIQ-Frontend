@@ -3,7 +3,6 @@ import axiosClient from './axiosClient';
 import { ApiContractError } from '../utils/apiErrors';
 import { isMockMode } from './mode';
 import { mockService } from '../mock/service';
-import { PUBLIC_SIGNUP_ROLES } from '../utils/roles';
 
 // ========================================
 // 1. Normal Email / Password Login
@@ -91,20 +90,21 @@ export async function signup({
   full_name,
   email,
   password,
-  requested_role
+  department_id
 }) {
   if (isMockMode) {
     return mockService.signup({
       full_name,
       email,
       password,
-      requested_role
+      requested_role: 'STUDENT',
+      department_id
     });
   }
 
-  if (!PUBLIC_SIGNUP_ROLES.includes(requested_role)) {
+  if (!Number.isInteger(Number(department_id)) || Number(department_id) <= 0) {
     throw new ApiContractError(
-      'Choose a supported registration role.'
+      'Please select a valid department.'
     );
   }
 
@@ -114,7 +114,7 @@ export async function signup({
       full_name,
       email,
       password,
-      requested_role
+      department_id: Number(department_id)
     },
     {
       auth: false
